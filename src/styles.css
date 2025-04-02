@@ -1,3 +1,40 @@
+@import "primeicons/primeicons.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* btn settings */
+.btn-outline {
+  background-color: #eeeeee;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+  color: #3d3d3d;
+  padding: 2px 20px;
+  margin: 8px 0;
+  cursor: pointer;
+}
+.btn-outline:hover {
+  background-color: #e5e5e5;
+  color: #3d3d3d;
+  transition: all 0.3s ease;
+}
+
+.btn {
+  background-color: #00778f;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+  color: white;
+  padding: 5px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #006276;
+  transition: all 0.3s ease;
+}
+
+/* Table style */

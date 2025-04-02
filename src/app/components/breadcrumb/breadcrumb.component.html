@@ -1,0 +1,6 @@
+@for (item of breadcrumbList; track $index) {
+<!-- <p class="text-sm inline cursor-pointer" [routerLink]="item.url"> -->
+<p class="text-sm inline">
+  {{ $index === 0 ? item.label : " / " + item.label }}
+</p>
+}

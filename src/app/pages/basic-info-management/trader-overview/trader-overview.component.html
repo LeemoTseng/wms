@@ -1,0 +1,201 @@
+<!-- container -->
+<div class="flex flex-col gap-5">
+  <p class="text-lg font-bold">基本資料管理</p>
+  <hr />
+  <div class="title flex justify-between items-center">
+    <p class="text-lg font-bold">交易對象總覽</p>
+    <div class="btn w-[200px] h-full">新增交易對象</div>
+  </div>
+  <div class="flex flex-col gap-2 w-full">
+    <!-- search -->
+    <div class="w-full">
+      <p class="py-2">搜尋條件</p>
+
+      <div class="grid grid-cols-6 gap-2">
+        <!-- trader code -->
+        <p-select
+          size="small"
+          class="w-full h-full"
+          [options]="traders"
+          [(ngModel)]="selectedTraderRole"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="交易對象代碼"
+        >
+          <ng-template #selectedItem let-selcetedTraderCode>
+            <div class="flex items-center gap-2">
+              <div>{{ selcetedTraderCode.traderCode }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-selcetedTraderCode #item>
+            <div class="flex items-center gap-2">
+              <div>{{ selcetedTraderCode.traderCode }}</div>
+            </div>
+          </ng-template>
+        </p-select>
+        <!-- trader name -->
+        <p-select
+          size="small"
+          class="w-full h-full"
+          [options]="traders"
+          [(ngModel)]="selectedTraderName"
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="交易對象名稱"
+        >
+          <ng-template #selectedItem let-selectedOption>
+            <div class="flex items-center gap-2">
+              <div>{{ selectedOption.traderName }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-country #item>
+            <div class="flex items-center gap-2">
+              <div>{{ country.traderName }}</div>
+            </div>
+          </ng-template>
+        </p-select>
+        <!-- trade no. -->
+        <div size="small" class="w-full h-full">
+          <label for="integer" class="font-bold block"></label>
+          <input
+            size="small"
+            class="w-full h-full"
+            pInputText
+            id="integer"
+            pKeyFilter="int"
+            placeholder="統編"
+          />
+        </div>
+        <!-- trader type -->
+        <p-select
+          size="small"
+          class="w-full h-full"
+          [options]="traders"
+          [(ngModel)]="selectedTraderType"
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="交易對象類型"
+        >
+          <ng-template #selectedItem let-selectedTraderType>
+            <div class="flex items-center gap-2">
+              <div>{{ selectedTraderType.traderType }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-selectedTraderName #item>
+            <div class="flex items-center gap-2">
+              <div>{{ selectedTraderName.traderType }}</div>
+            </div>
+          </ng-template>
+        </p-select>
+        <!-- trader role -->
+        <p-select
+          size="small"
+          class="w-full h-full"
+          [options]="traderRoles"
+          [(ngModel)]="selectedTraderRole"
+          optionLabel="name"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="角色"
+        >
+          <ng-template #selectedItem let-selectedTraderRole>
+            <div class="flex items-center gap-2">
+              <div>{{ selectedTraderRole.name }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-selectedTraderName #item>
+            <div class="flex items-center gap-2">
+              <div>{{ selectedTraderName.name }}</div>
+            </div>
+          </ng-template>
+        </p-select>
+      </div>
+
+      <!-- isEnabled -->
+      <div class="check w-full flex item-center gap-2 pt-2">
+        <input
+          id="isEnabled"
+          type="checkbox"
+          class=""
+          [(ngModel)]="isEnabled"
+        />
+        <label for="isEnabled" class="text-sm">僅查詢已啟用的項目</label>
+      </div>
+    </div>
+    <!-- btn -->
+    <div class="btn-outline w-[200px]">查詢</div>
+
+    <!-- Table -->
+    <table class="mt-5">
+      <thead>
+        <tr align="left" class="border-b">
+          @for (item of traderTableColumns; track $index) {
+          <th class="pb-3 text-sm">
+            <p>{{ item }}</p>
+          </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of traderTableData; track $index) {
+        <tr class="border-b py-3 table-fixed">
+          <td [class]="columnstyle">
+            @if (item.enable) {
+            <div class="ml-2 rounded-full w-[10px] h-[10px] bg-green-400"></div>
+            }@else {
+            <div class="ml-2 rounded-full w-[10px] h-[10px] bg-gray-200"></div>
+
+            }
+          </td>
+          <td [class]="columnstyle">{{ item.code }}</td>
+          <td [class]="columnstyle">{{ item.name }}</td>
+          <td [class]="columnstyle">{{ item.traderNo }}</td>
+          <td [class]="columnstyle">{{ item.traderType }}</td>
+          <td [class]="columnstyle">{{ item.traderRole }}</td>
+          <td>
+            <div class="flex items-center gap-x-2">
+              <p-iconfield
+                style="font-size: 12px"
+                styleClass="pi pi-calendar  cursor-pointer"
+              ></p-iconfield>
+              <p class="text-sm">{{ item.createdAt }}</p>
+            </div>
+
+            <div class="flex items-center gap-x-2">
+              <p-iconfield
+                style="font-size: 12px"
+                styleClass="pi pi-user  cursor-pointer"
+              ></p-iconfield>
+              <p class="text-sm">{{ item.createdName }}</p>
+            </div>
+          </td>
+          <td>
+            <div class="flex items-center gap-x-2">
+              <p-iconfield
+                style="font-size: 12px"
+                styleClass="pi pi-calendar  cursor-pointer"
+              ></p-iconfield>
+              <p class="text-sm">{{ item.updatedAt }}</p>
+            </div>
+
+            <div class="flex items-center gap-x-2">
+              <p-iconfield
+                style="font-size: 12px"
+                styleClass="pi pi-user  cursor-pointer"
+              ></p-iconfield>
+              <p class="text-sm">{{ item.updatedName }}</p>
+            </div>
+          </td>
+        </tr>
+
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

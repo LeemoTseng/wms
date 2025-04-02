@@ -1,0 +1,15 @@
+<div class="flex bg-gray-100">
+  <!-- sidebar -->
+  <app-sidebar></app-sidebar>
+  <div class="p-10 w-full flex flex-col gap-1">
+    <div class="flex justify-between items-center">
+      <!-- breadcrumb -->
+      <app-breadcrumb [breadcrumbList]="breadcrumbList"></app-breadcrumb>
+      <app-bookmark></app-bookmark>
+    </div>
+    <!-- main section -->
+    <div class="bg-white w-full p-10 shadow-sm rounded-lg">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
