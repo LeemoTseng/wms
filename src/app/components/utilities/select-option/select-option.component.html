@@ -1,0 +1,19 @@
+<p-select
+  size="small"
+  class="w-full h-full placeholder:text-gray-100"
+  [options]="tableData"
+  [filter]="true"
+  [showClear]="!!selectedValue"
+  [placeholder]="placeholder"
+>
+  <ng-template #selectedItem let-value>
+    <div class="flex items-center gap-2">
+      <div>{{ isObject(value) ? value?.[valueItem] : value }}</div>
+    </div>
+  </ng-template>
+  <ng-template let-value #item>
+    <div class="flex items-center gap-2">
+      <div>{{ isObject(value) ? value?.[valueItem] : value }}</div>
+    </div>
+  </ng-template>
+</p-select>

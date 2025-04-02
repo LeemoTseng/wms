@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-breadcrumb',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './breadcrumb.component.html',
 })
 export class BreadcrumbComponent {

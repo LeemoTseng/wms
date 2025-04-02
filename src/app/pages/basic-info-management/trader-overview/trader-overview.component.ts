@@ -5,12 +5,17 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IconFieldModule } from 'primeng/iconfield';
+import { InputComponent } from '../../../components/utilities/input/input.component';
+import { SelectOptionComponent } from "../../../components/utilities/select-option/select-option.component";
 
 @Component({
   selector: 'app-trader-overview',
-  imports: [FormsModule, SelectModule, InputTextModule, ButtonModule, ReactiveFormsModule, IconFieldModule],
+  imports: [FormsModule, SelectModule, InputTextModule,
+    ButtonModule, ReactiveFormsModule, IconFieldModule,
+    InputComponent, SelectOptionComponent],
   standalone: true,
   templateUrl: './trader-overview.component.html',
+  styles: ` `
 })
 export class TraderOverviewComponent {
 
@@ -20,13 +25,12 @@ export class TraderOverviewComponent {
   // styles
   columnstyle = 'py-4 align-left text-left text-sm';
 
-
   // trader search content
-
-  selectedTraderName: string | undefined;
-  selectedTraderType: string | undefined;
-  selectedTraderRole: string | undefined;
-  selcetedTraderCode: string | undefined;
+  selectedTraderName: any;
+  selectedTraderType: any;
+  selectedTraderRole: any;
+  selcetedTraderCode: any;
+  traderNo: string = ''; // 統編
   isEnabled: boolean | undefined;
 
   traders = [
@@ -41,15 +45,6 @@ export class TraderOverviewComponent {
     { traderCode: 'YZA', traderName: '亨利有限公司', traderType: '雜貨', traderRole: '供應商' },
     { traderCode: 'BCD', traderName: '露娜有限公司', traderType: '寵物用品', traderRole: '客戶' }
   ];
-
-  traderRoles = [{
-    name: '供應商',
-    code: 'supplier'
-  },
-  {
-    name: '客戶',
-    code: 'customer'
-  }]
 
 
   traderTableColumns = ['啟用', '對象代碼', '對象名稱', '統編', '對象類型', '角色', '建立人員', '最後更新'];
@@ -66,8 +61,25 @@ export class TraderOverviewComponent {
     { enable: true, code: 'BCD010', name: 'Luna', traderNo: '11223344', traderType: '寵物用品', traderRole: '客戶', createdName: 'admin', createdAt: '2024-02-15', updatedName: 'admin', updatedAt: '2024-03-20' }
   ];
 
+  traderRoles = [{
+    name: '供應商',
+    code: 'supplier'
+  },
+  {
+    name: '客戶',
+    code: 'customer'
+  }]
+
+
   /*---------- lifecycle hooks ----------*/
 
 
 
+  /*---------- methods ----------*/
+  // get data from api
+
+  // get data from child-component
+  getInputValue(value: any) {
+    this.traderNo = value;
+  }
 }

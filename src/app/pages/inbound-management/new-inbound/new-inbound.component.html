@@ -1,1 +1,137 @@
-<p>new-inbound works!</p>
+<!-- container -->
+<div class="flex flex-col gap-5">
+  <div class="title flex items-center gap-3">
+    <p-iconfield
+      [routerLink]="'/inbound-management/inbound-list'"
+      styleClass="pi pi-angle-left  p-2 rounded-sm hover:bg-gray-100 cursor-pointer"
+      style="font-size: 18px"
+    ></p-iconfield>
+    <p class="text-lg font-bold">新增入庫單</p>
+  </div>
+  <hr />
+  <!-- 供應商基本資料 -->
+  <div class="title flex justify-between items-center">
+    <p class="text-base font-bold">供應商基本資料</p>
+  </div>
+  <div class="flex flex-col gap-2 w-full">
+    <!-- search -->
+    <div class="flex items-center gap-5">
+      <p class="py-2">商品所屬</p>
+      <!-- trade no. -->
+      <app-input [placeholder]="'請輸入公司名稱'"></app-input>
+      <p>
+        統一編號： <span>{{ traderNo }}</span>
+      </p>
+    </div>
+  </div>
+  <hr />
+
+  <!-- 入庫單明細 -->
+  <div class="title flex justify-between items-center">
+    <p class="text-base font-bold">新增入庫單明細</p>
+    <div class="btn-outline w-[230px]">匯入入庫單</div>
+  </div>
+  <!--------------- TABLE --------------->
+  <table class="mt-5">
+    <thead>
+      <tr align="left" class="border-b">
+        @for (item of tableSchema; track $index) {
+        <th class="p-1 pl-2 text-sm">
+          <p>{{ item.label }}</p>
+        </th>
+        }
+      </tr>
+    </thead>
+    <tbody></tbody>
+
+    <tbody>
+      @for (row of traderTableData; let rowIndex = $index; track rowIndex) {
+      <tr class="border-b">
+        @for (item of tableSchema; let colIndex = $index; track colIndex) {
+        <td class="p-2">
+          <!-- datepicker -->
+          @if (item.type === 'date') {
+          <div [class]="errorStyle">
+            <p-datepicker
+              [(ngModel)]="traderTableData[rowIndex][item.key]"
+              size="small"
+              [placeholder]="item.label"
+              showIcon
+              iconDisplay="input"
+            />
+          </div>
+          }
+          <!-- select -->
+          @if (item.type === 'select') {
+          <div [class]="errorStyle">
+            <app-select-option
+              [tableData]="item.options!"
+              [placeholder]="item.label"
+              [selectedValue]="row[item.key]"
+              [valueItem]="'name'"
+            ></app-select-option>
+          </div>
+          }
+
+          <!-- number -->
+          @if (item.type === 'number') {
+          <div [class]="errorStyle">
+            <input
+              type="number"
+              [placeholder]="item.label"
+              [class]="inputStyle"
+              [(ngModel)]="traderTableData[rowIndex][item.key]"
+            />
+          </div>
+          }
+
+          <!-- text -->
+          @if (item.type === 'text') {
+          <div [class]="errorStyle">
+            <input
+              type="text"
+              [class]="inputStyle"
+              [placeholder]="item.label"
+              [(ngModel)]="traderTableData[rowIndex][item.key]"
+            />
+          </div>
+          }
+        </td>
+        }
+
+        <!-- delete -->
+        <td class="text-center">
+          @if (rowIndex !== 0) {
+          <p-iconfield
+            (click)="deleteRow(rowIndex)"
+            styleClass="pi pi-trash"
+            class="text-red-500 hover:text-red-700 cursor-pointer"
+          ></p-iconfield
+          >}
+        </td>
+      </tr>
+      }
+      <tr>
+        <td
+          colspan="12"
+          (click)="addRow()"
+          class="border-gray-400 border-y text-center"
+        >
+          <div
+            class="flex items-center gap-2 justify-center p-2 rounded-sm hover:bg-gray-100 transition cursor-pointer"
+          >
+            <p-iconfield
+              styleClass="pi pi-plus-circle"
+              style="font-size: 18px"
+              class="cursor-pointer"
+            ></p-iconfield>
+            <p class="cursor-pointer">點此新增一列</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- btns -->
+  <div class="btn w-[200px] h-full">確認新增</div>
+</div>

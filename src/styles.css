@@ -6,19 +6,20 @@
 
 /* btn settings */
 .btn-outline {
-  background-color: #eeeeee;
   border-radius: 5px;
   text-align: center;
   font-size: 16px;
   color: #3d3d3d;
-  padding: 2px 20px;
+  border: #797979 1px solid;
+  padding: 5px 20px;
   margin: 8px 0;
   cursor: pointer;
 }
 .btn-outline:hover {
-  background-color: #e5e5e5;
+  background-color: #f0f0f0;
+
   color: #3d3d3d;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .btn {
@@ -34,7 +35,7 @@
 }
 .btn:hover {
   background-color: #006276;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 /* Table style */
