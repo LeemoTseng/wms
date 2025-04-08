@@ -18,7 +18,16 @@ module.exports = {
           800: '#004d5c',
           900: '#003843',
         }
-      }
+      },
+      animation: {
+        shimmer: "shimmer 1.5s infinite linear",
+      },
+      keyframes: {
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+      },
     },
   },
   plugins: [],

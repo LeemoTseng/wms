@@ -1,0 +1,7 @@
+@for (row of getRowArray(); track $index) {
+<div>
+  @for (col of getColArray(); track $index) {
+  <div [style]="'height:' + rowHeight + 'px'" [class]="skeletonStyles"></div>
+  }
+</div>
+}

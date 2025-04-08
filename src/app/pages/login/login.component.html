@@ -1,1 +1,94 @@
-<p>login works!</p>
+<div class="object-cover overflow-hidden w-full h-[100vh]">
+  <img
+    class="object-cover w-full h-full scale-[1.1] grayscale-[0.8] blur-2xl brightness-[1.5]"
+    [src]="bgImgUrl"
+    alt=""
+  />
+</div>
+<!-- login -->
+<div
+  class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] md:w-[50vw] h-[80vh] xl:w-[60vw] flex items-center justify-center"
+>
+  <div
+    class="rounded-2xl drop-shadow-lg bg-white w-full h-full grid grid-cols-1 xl:grid-cols-2 p-1"
+  >
+    <div class="w-[360px] mx-auto flex flex-col my-auto gap-4 p-5">
+      <div class="logo">
+        <img class="w-[120px] mx-auto" [src]="logoImgUrl" alt="" />
+      </div>
+      <div class="greeting text-center flex flex-col gap-2">
+        <div class="text-2xl font-bold">歡迎回來</div>
+        <div class="text-sm">請輸入您的帳號密碼以登入系統</div>
+      </div>
+      <div class="flex flex-col">
+        <div class="flex flex-col gap-1 w-[320px] relative">
+          <label class="text-[12px]" for="username">使用者名稱</label>
+          <input
+            (input)="clearErrorStyle('username')"
+            pSize="small"
+            pInputText
+            id="username"
+            [(ngModel)]="username"
+          />
+          <p-iconfield
+            class="absolute h-[1px] -right-[290px] bottom-[28px]"
+            style="font-size: 12px"
+            styleClass="pi pi-user"
+          ></p-iconfield>
+
+          <label class="text-[12px]" for="username">密碼</label>
+          <input
+            (input)="clearErrorStyle('password')"
+            pSize="small"
+            pInputText
+            id="password"
+            type="password"
+            [(ngModel)]="password"
+          />
+          @if (!isVisible) {<p-iconfield
+            (click)="showPassword()"
+            class="absolute -right-[290px] bottom-[28px]"
+            style="font-size: 12px; width: fit-content"
+            styleClass="pi pi-eye-slash cursor-pointer"
+          ></p-iconfield
+          >}@else {<p-iconfield
+            (click)="showPassword()"
+            class="absolute -right-[290px] bottom-[28px]"
+            style="font-size: 12px; color: #488a99"
+            styleClass="pi pi-eye cursor-pointer"
+          ></p-iconfield
+          >}
+        </div>
+        <p class="m-0 text-[12px] text-red-400">
+          {{ errorMsg }}
+        </p>
+      </div>
+      <div class="isRemember flex justify-start items-center gap-2">
+        <input type="checkbox" id="isRemember" />
+        <label class="text-sm" for="isRemember">記得我的帳號</label>
+      </div>
+
+      @if (isLoading) {
+      <div
+        style="background-color: #81aeb8; cursor: default"
+        class="btn w-[320px]"
+      >
+        <div
+          class="mx-auto w-5 h-5 border-2 my-[2px] border-white border-t-transparent rounded-full animate-spin"
+        ></div>
+      </div>
+      }@else {
+      <div (click)="login()" class="btn w-[320px] mt-[50px]">登入</div>
+      }
+    </div>
+
+    <!-- right img -->
+    <div class="hidden xl:block">
+      <img
+        class="object-cover w-full h-full rounded-s-none rounded-2xl hover:brightness-[1.2] transition-all duration-700"
+        [src]="frameImgUrl"
+        alt=""
+      />
+    </div>
+  </div>
+</div>

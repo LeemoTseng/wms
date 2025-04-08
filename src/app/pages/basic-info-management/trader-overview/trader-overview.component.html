@@ -27,7 +27,10 @@
           [valueItem]="'traderName'"
         ></app-select-option>
         <!-- trade no. -->
-        <app-input [placeholder]="'統編'" [(ngModel)]="traderNo"></app-input>
+        <app-input
+          [placeholder]="'統編'"
+          (inputValue)="getInputValue($event)"
+        ></app-input>
         <!-- trader type -->
         <app-select-option
           [tableData]="traders"
@@ -68,7 +71,20 @@
         <label for="isEnabled" class="text-sm">僅查詢已啟用的項目</label>
       </div>
       <!-- btn -->
+      @if (isLoading) {
+      <div
+        style="cursor: default; background-color: #f2f2f2; border: none"
+        class="btn-outline w-[230px] bg-gray-2 cursor-default"
+        onmouseover="this.style.backgroundColor='#f2f2f2';"
+        onmouseout="this.style.backgroundColor='#f2f2f2';"
+      >
+        <div
+          class="mx-auto w-5 h-5 border-2 my-[2px] border-gray-300 border-t-transparent rounded-full animate-spin"
+        ></div>
+      </div>
+      }@else{
       <div class="btn-outline w-[230px]">查詢</div>
+      }
     </div>
 
     <!--------------- TABLE --------------->
@@ -82,6 +98,21 @@
           }
         </tr>
       </thead>
+      @if (isLoading) {
+      <tbody>
+        @for (item of [1,2,3,4,5,6,7,8,9,10]; track $index) {
+        <tr>
+          <td colspan="8" class="py-5">
+            <app-skeleton-loader
+              [rowHeight]="20"
+              [cols]="1"
+              [rows]="1"
+            ></app-skeleton-loader>
+          </td>
+        </tr>
+        }
+      </tbody>
+      } @else {
       <tbody>
         @for (item of traderTableData; track $index) {
         <tr class="border-b py-3 table-fixed">
@@ -136,6 +167,7 @@
 
         }
       </tbody>
+      }
     </table>
   </div>
 </div>
