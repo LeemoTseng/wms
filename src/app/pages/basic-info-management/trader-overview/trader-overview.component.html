@@ -95,8 +95,12 @@
         (onPageChange)="onPageChange($event)"
       ></app-pagination>
     </div>
-    <!--------------- TABLE --------------->
-    <table class="mt-5">
+  </div>
+  <!--------------- TABLE --------------->
+  <div
+    class="border h-[300px] overflow-y-scroll border-gray-200 rounded-lg shadow-sm p-5"
+  >
+    <table class="mt-5 table-auto w-full">
       <thead>
         <tr align="left" class="border-b">
           @for (item of tableColumns; track $index) {

@@ -95,93 +95,101 @@
       ></app-pagination>
     </div>
     <!--------------- TABLE --------------->
-    <table class="mt-5">
-      <thead>
-        <tr align="left" class="border-b">
-          @for (item of tableColumns; track $index) {
-          <th class="pb-3 text-sm">
-            <p>{{ item }}</p>
-          </th>
-          }
-        </tr>
-      </thead>
-      @if (isLoading) {
-      <tbody>
-        @for (item of [1,2,3,4,5,6,7,8,9,10]; track $index) {
-        <tr>
-          <td [attr.colspan]="tableColumns.length" class="py-5">
-            <app-skeleton-loader
-              [rowHeight]="20"
-              [cols]="1"
-              [rows]="1"
-            ></app-skeleton-loader>
-          </td>
-        </tr>
-        }
-      </tbody>
-      } @else {
-      <tbody>
-        @for (item of tableData; track $index) {
-        <tr class="border-b py-3 table-fixed">
-          <td [class]="columnstyle">
-            @if (item.isActive) {
-            <div class="ml-2 rounded-full w-[10px] h-[10px] bg-green-400"></div>
-            }@else {
-            <div class="ml-2 rounded-full w-[10px] h-[10px] bg-gray-200"></div>
-
+    <div
+      class="border h-[300px] overflow-y-scroll border-gray-200 rounded-lg shadow-sm p-5"
+    >
+      <table class="table-auto w-full">
+        <thead>
+          <tr align="left" class="border-b">
+            @for (item of tableColumns; track $index) {
+            <th class="pb-3 text-sm">
+              <p>{{ item }}</p>
+            </th>
             }
-          </td>
-          <td [class]="columnstyle">{{ item.partyCode }}</td>
-          <td [class]="columnstyle">{{ item.partyName }}</td>
-          <td [class]="columnstyle">{{ item.companyID }}</td>
-          <td [class]="columnstyle">{{ item.partyType }}</td>
-          <td [class]="columnstyle">{{ item.isVendor }}</td>
-          <td>
-            <div class="flex items-center gap-x-2">
-              <p-iconfield
-                style="font-size: 12px"
-                styleClass="pi pi-calendar"
-              ></p-iconfield>
-              <p class="text-sm">{{ item.createdAt }}</p>
-            </div>
+          </tr>
+        </thead>
+        @if (isLoading) {
+        <tbody>
+          @for (item of [1,2,3,4,5,6,7,8,9,10]; track $index) {
+          <tr>
+            <td [attr.colspan]="tableColumns.length" class="py-5">
+              <app-skeleton-loader
+                [rowHeight]="20"
+                [cols]="1"
+                [rows]="1"
+              ></app-skeleton-loader>
+            </td>
+          </tr>
+          }
+        </tbody>
+        } @else {
+        <tbody>
+          @for (item of tableData; track $index) {
+          <tr class="border-b py-3 table-fixed">
+            <td [class]="columnstyle">
+              @if (item.isActive) {
+              <div
+                class="ml-2 rounded-full w-[10px] h-[10px] bg-green-400"
+              ></div>
+              }@else {
+              <div
+                class="ml-2 rounded-full w-[10px] h-[10px] bg-gray-200"
+              ></div>
 
-            <div class="flex items-center gap-x-2">
-              <p-iconfield
-                style="font-size: 12px"
-                styleClass="pi pi-user"
-              ></p-iconfield>
-              <p class="text-sm">{{ item.createdByID }}</p>
-            </div>
-          </td>
-          <td>
-            <div class="flex items-center gap-x-2">
-              <p-iconfield
-                style="font-size: 12px"
-                styleClass="pi pi-calendar"
-              ></p-iconfield>
-              <p class="text-sm">{{ item.updatedAt }}</p>
-            </div>
+              }
+            </td>
+            <td [class]="columnstyle">{{ item.partyCode }}</td>
+            <td [class]="columnstyle">{{ item.partyName }}</td>
+            <td [class]="columnstyle">{{ item.companyID }}</td>
+            <td [class]="columnstyle">{{ item.partyType }}</td>
+            <td [class]="columnstyle">{{ item.isVendor }}</td>
+            <td>
+              <div class="flex items-center gap-x-2">
+                <p-iconfield
+                  style="font-size: 12px"
+                  styleClass="pi pi-calendar"
+                ></p-iconfield>
+                <p class="text-sm">{{ item.createdAt }}</p>
+              </div>
 
-            <div class="flex items-center gap-x-2">
-              <p-iconfield
-                style="font-size: 12px"
-                styleClass="pi pi-user"
-              ></p-iconfield>
-              <p class="text-sm">{{ item.updatedByID }}</p>
-            </div>
-          </td>
-          <td>
-            <p-iconfield
-              (click)="goToInboundDetails(item.companyID)"
-              style="font-size: 12px"
-              styleClass="pi pi-chevron-right cursor-pointer w-fit hover:bg-gray-100 p-2 rounded-full text-gray-500"
-            ></p-iconfield>
-          </td>
-        </tr>
+              <div class="flex items-center gap-x-2">
+                <p-iconfield
+                  style="font-size: 12px"
+                  styleClass="pi pi-user"
+                ></p-iconfield>
+                <p class="text-sm">{{ item.createdByID }}</p>
+              </div>
+            </td>
+            <td>
+              <div class="flex items-center gap-x-2">
+                <p-iconfield
+                  style="font-size: 12px"
+                  styleClass="pi pi-calendar"
+                ></p-iconfield>
+                <p class="text-sm">{{ item.updatedAt }}</p>
+              </div>
 
+              <div class="flex items-center gap-x-2">
+                <p-iconfield
+                  style="font-size: 12px"
+                  styleClass="pi pi-user"
+                ></p-iconfield>
+                <p class="text-sm">{{ item.updatedByID }}</p>
+              </div>
+            </td>
+            <td>
+              <p-iconfield
+                (click)="goToInboundDetails(item.companyID)"
+                style="font-size: 12px"
+                styleClass="pi pi-chevron-right cursor-pointer w-fit hover:bg-gray-100 p-2 rounded-full text-gray-500"
+              ></p-iconfield>
+            </td>
+          </tr>
+
+          }
+        </tbody>
         }
-      </tbody>
-      }
-    </table>
+      </table>
+    </div>
   </div>
 </div>

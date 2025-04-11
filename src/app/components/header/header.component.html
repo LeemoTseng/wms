@@ -1,0 +1,25 @@
+<!-- btn -->
+<div class="bg-white shadow-sm border-b relative">
+  <div class="flex justify-end">
+    <div (click)="toggleMenuClick()" class="border rounded-md w-fit m-1 mr-5">
+      <p class="py-1 px-3 text-sm hover:bg-gray-50 cursor-pointer">按鈕</p>
+    </div>
+  </div>
+  <!-- options -->
+  @if (toggleMenu) {
+  <div class="frame w-fit absolute top-0 right-0 mt-10 mr-5 z-10">
+    <div class="bg-white shadow-sm border border-b p-1 rounded-md">
+      <ul>
+        <!-- border-t -->
+        @for (item of menulist; track $index) {
+        <li class="px-3 py-1 hover:bg-gray-100 cursor-pointer">
+          <p [routerLink]="item.route" class="cursor-pointer">
+            {{ item.option }}
+          </p>
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+  }
+</div>

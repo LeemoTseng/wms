@@ -1,79 +1,95 @@
-<div class="sidebar">
-  <div
-    class="menuList transition-all duration-200 border border-gray-200 bg-white h-full"
-    [ngClass]="{
-      'w-[260px]': !collapsed,
-      'w-[60px]': collapsed
-    }"
-  >
-    <!-- Logo & Toggle -->
-    <div class="flex items-center justify-between px-2 py-2">
-      @if (!collapsed) {
-      <div class="logo p-2 transition-all">
-        <img src="logo.svg" alt="" />
+<div
+  class="relative transition-all duration-200"
+  [ngClass]="{
+    'w-[260px]': !collapsed,
+    'w-[60px]': collapsed
+  }"
+></div>
+<div class="h-screen overflow-y-auto fixed top-0 left-0 z-50">
+  <div class="sidebar bg-white h-full z-50">
+    <div
+      class="menuList transition-all duration-200"
+      [ngClass]="{
+        'w-[260px]': !collapsed,
+        'w-[60px]': collapsed
+      }"
+    >
+      <!-- Logo & Toggle -->
+      <div class="flex items-center justify-between px-2 py-2">
+        @if (!collapsed) {
+        <div
+          [routerLink]="'/basic-info-management/trader-overview'"
+          class="logo p-2 transition-all"
+        >
+          <img src="logo.svg" alt="" />
+        </div>
+        }
+
+        <!-- menu toggle icon -->
+        @if (collapsed) {
+        <p-iconfield
+          styleClass="pi pi-angle-right p-3 rounded-md hover:bg-gray-100 cursor-pointer"
+          (click)="toggleCollapse()"
+        ></p-iconfield
+        >}@else {
+        <p-iconfield
+          styleClass="pi pi-angle-left p-3 rounded-md hover:bg-gray-100 cursor-pointer"
+          (click)="toggleCollapse()"
+        ></p-iconfield>
+        }
       </div>
-      }
 
-      <!-- menu toggle icon -->
-      @if (collapsed) {
-      <p-iconfield
-        styleClass="pi pi-angle-right p-3 rounded-md hover:bg-gray-100 cursor-pointer"
-        (click)="toggleCollapse()"
-      ></p-iconfield
-      >}@else {
-      <p-iconfield
-        styleClass="pi pi-angle-left p-3 rounded-md hover:bg-gray-100 cursor-pointer"
-        (click)="toggleCollapse()"
-      ></p-iconfield>
-      }
-    </div>
-
-    <!-- Menu List -->
-    <div class="bg-white px-2 py-1 text-sm text-gray-700">
-      <ul class="flex flex-col gap-1">
-        @for (group of menuList; track $index) {
-        <li
-          class="pl-2 py-1"
-          [ngClass]="{ 'pl-3 ': !collapsed, 'border-t': collapsed }"
-        >
-          @if (group.items.length > 0 && !collapsed) {
-          <p class="font-bold">
-            {{ group.group }}
-          </p>
-          }
-        </li>
-
-        @for (item of group.items; track $index) {
-        <li
-          (click)="onMenuClick(item)"
-          class="group cursor-pointer relative flex items-center gap-2 px-2 py-2 rounded hover:bg-gray-100 transition-all"
-          [ngClass]="{
-            'font-medium bg-gray-100': item.isActive,
-            'justify-center': collapsed
-          }"
-        >
-          @if (collapsed) {
-          <p
-            class="absolute hidden group-hover:block top-1/2 -translate-y-1/2 left-10 px-2 py-1 text-sm bg-gray-400 text-white rounded-md text-nowrap z-10 opacity-80"
+      <!-- Menu List -->
+      <div class="bg-white px-2 py-1 text-sm text-gray-700">
+        <ul class="flex flex-col gap-1">
+          @for (group of menuList; track $index) {
+          <li
+            class="pl-2 py-1"
+            [ngClass]="{ 'pl-3 ': !collapsed, 'border-t': collapsed }"
           >
-            {{ item.label }}
-          </p>
-          }
-          <i
-            class="cursor-pointer"
-            [class]="item.icon"
+            @if (group.items.length > 0 && !collapsed) {
+            <p class="font-bold">
+              {{ group.group }}
+            </p>
+            }
+          </li>
+
+          @for (item of group.items; track $index) {
+          <li
+            (click)="onMenuClick(item)"
+            class="group cursor-pointer relative flex items-center gap-2 px-2 py-2 rounded hover:bg-gray-100 transition-all"
             [ngClass]="{
-              'text-primary-400': item.isActive,
-              'text-2xl': collapsed,
-              'text-lg': !collapsed
+              'font-medium bg-gray-100': item.isActive,
+              'justify-center': collapsed
             }"
-          ></i>
-          <p class="truncate cursor-pointer" [ngClass]="{ hidden: collapsed }">
-            {{ item.label }}
-          </p>
-        </li>
-        } }
-      </ul>
+          >
+            <!-- 這個壞掉了，待修正 ---
+             @if (collapsed) {
+            <p
+              class="absolute hidden group-hover:block top-1/2 -translate-y-1/2 left-10 px-2 py-1 text-sm bg-gray-400 text-white rounded-md text-nowrap opacity-80"
+            >
+              {{ item.label }}
+            </p> 
+            }-->
+            <i
+              class="cursor-pointer"
+              [class]="item.icon"
+              [ngClass]="{
+                'text-primary-400': item.isActive,
+                'text-2xl': collapsed,
+                'text-lg': !collapsed
+              }"
+            ></i>
+            <p
+              class="truncate cursor-pointer"
+              [ngClass]="{ hidden: collapsed }"
+            >
+              {{ item.label }}
+            </p>
+          </li>
+          } }
+        </ul>
+      </div>
     </div>
   </div>
 </div>

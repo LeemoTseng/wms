@@ -98,55 +98,59 @@
     ></app-pagination>
   </div>
   <!-- products list -->
-  <table class="">
-    <thead>
-      <tr align="left" class="border-b">
-        @for (item of tableColumns; track $index) {
-        <th class="pb-3 text-sm">
-          <p>{{ item }}</p>
-        </th>
-        }
-      </tr>
-    </thead>
-    @if (isLoading) {
-    <tbody>
-      @for (item of [1,2,3,4,5,6,7,8,9,10]; track $index) {
-      <tr>
-        <td [attr.colspan]="tableColumns.length" class="py-5">
-          <app-skeleton-loader
-            [rowHeight]="20"
-            [cols]="1"
-            [rows]="1"
-          ></app-skeleton-loader>
-        </td>
-      </tr>
-      }
-    </tbody>
-    } @else {
-    <tbody>
-      @for (item of tableData; track $index) {
-      <tr class="border-b py-3 table-fixed">
-        <td [class]="columnstyle">
-          @if (item.isActive) {
-          <div class="ml-2 rounded-full w-[10px] h-[10px] bg-green-400"></div>
-          }@else {
-          <div class="ml-2 rounded-full w-[10px] h-[10px] bg-gray-200"></div>
-
+  <div
+    class="border h-[300px] overflow-y-scroll border-gray-200 rounded-lg shadow-sm p-5"
+  >
+    <table class="table-auto w-full">
+      <thead>
+        <tr align="left" class="border-b">
+          @for (item of tableColumns; track $index) {
+          <th class="pb-3 text-sm">
+            <p>{{ item }}</p>
+          </th>
           }
-        </td>
-        <td [class]="columnstyle">{{ item.itemName }}</td>
-        <td [class]="columnstyle">{{ item.itemCode }}</td>
-        <td [class]="columnstyle">{{ item.description }}</td>
-        <td [class]="columnstyle">{{ item.validDays }}</td>
-        <td [class]="columnstyle">{{ item.weight }}</td>
-        <td [class]="columnstyle">
-          {{ item.length + "x" + item.width + "x" + item.height }}
-        </td>
-        <td [class]="columnstyle">{{ item.baseUom }}</td>
-      </tr>
+        </tr>
+      </thead>
+      @if (isLoading) {
+      <tbody>
+        @for (item of [1,2,3,4,5,6,7,8,9,10]; track $index) {
+        <tr>
+          <td [attr.colspan]="tableColumns.length" class="py-5">
+            <app-skeleton-loader
+              [rowHeight]="20"
+              [cols]="1"
+              [rows]="1"
+            ></app-skeleton-loader>
+          </td>
+        </tr>
+        }
+      </tbody>
+      } @else {
+      <tbody>
+        @for (item of tableData; track $index) {
+        <tr class="border-b py-3 table-fixed">
+          <td [class]="columnstyle">
+            @if (item.isActive) {
+            <div class="ml-2 rounded-full w-[10px] h-[10px] bg-green-400"></div>
+            }@else {
+            <div class="ml-2 rounded-full w-[10px] h-[10px] bg-gray-200"></div>
 
+            }
+          </td>
+          <td [class]="columnstyle">{{ item.itemName }}</td>
+          <td [class]="columnstyle">{{ item.itemCode }}</td>
+          <td [class]="columnstyle">{{ item.description }}</td>
+          <td [class]="columnstyle">{{ item.validDays }}</td>
+          <td [class]="columnstyle">{{ item.weight }}</td>
+          <td [class]="columnstyle">
+            {{ item.length + "x" + item.width + "x" + item.height }}
+          </td>
+          <td [class]="columnstyle">{{ item.baseUom }}</td>
+        </tr>
+
+        }
+      </tbody>
       }
-    </tbody>
-    }
-  </table>
+    </table>
+  </div>
 </div>

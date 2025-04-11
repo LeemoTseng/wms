@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { IconFieldModule } from 'primeng/iconfield';
 import { TooltipModule } from 'primeng/tooltip';
 import { MenulistService } from '../../service/menulist.service';
@@ -9,7 +9,7 @@ import { MenulistService } from '../../service/menulist.service';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [IconFieldModule, NgClass, TooltipModule],
+  imports: [IconFieldModule, NgClass, TooltipModule, RouterLink],
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent {

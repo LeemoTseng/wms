@@ -6,9 +6,11 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { BookmarkComponent } from '../utilities/bookmark/bookmark.component';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from "../header/header.component";
+import { FooterComponent } from '../footer/footer.component';
 @Component({
   selector: 'app-main-layout',
-  imports: [SidebarComponent, BreadcrumbComponent, BookmarkComponent, RouterOutlet],
+  imports: [SidebarComponent, BreadcrumbComponent, BookmarkComponent, RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './main-layout.component.html'
 })
 export class MainLayoutComponent {
