@@ -9,16 +9,16 @@ import { SkeletonLoaderComponent } from "../../../components/utilities/skeleton-
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { PaginationComponent } from "../../../components/utilities/pagination/pagination.component";
 import { Router, RouterLink } from '@angular/router';
-
 @Component({
-  selector: 'app-trader-details',
+  selector: 'app-product-details',
   imports: [FormsModule, SelectModule, InputTextModule,
     ButtonModule, ReactiveFormsModule, IconFieldModule,
     RouterLink, SkeletonLoaderComponent,
     SkeletonLoaderComponent, PaginatorModule, PaginationComponent],
-  templateUrl: './trader-details.component.html'
+  templateUrl: './product-details.component.html'
 })
-export class TraderDetailsComponent {
+export class ProductDetailsComponent {
+
   /*---------- inject ----------*/
   // route
   route = inject(Router)
@@ -40,7 +40,7 @@ export class TraderDetailsComponent {
 
   infoData: any =
     {
-      partyName: '元翔企業股份有限公司',
+      partyName: '商品詳情',
       partyCode: 'YX001',
       companyID: '12345678',
       isVendor: true,
@@ -55,7 +55,7 @@ export class TraderDetailsComponent {
     faxNumber: '02-1234-5679',
   }
 
-  tableColumns = ['啟用', '商品名稱', '商品料好', '客戶的商品編號', '有效天數', '重量', '長寬高', '基本單位', '詳情']
+  tableColumns = ['啟用', '商品名稱', '商品料好', '客戶的商品編號', '有效天數', '重量', '長寬高', '基本單位']
   tableData = [
     { isActive: true, itemName: '商品A', itemCode: 'P001', description: 'C001', validDays: 30, weight: 1.5, length: '10', width: '10', height: '10', baseUom: 'PC' },
     { isActive: false, itemName: '商品B', itemCode: 'P002', description: 'C002', validDays: 60, weight: 2.0, length: '15', width: '15', height: '15', baseUom: 'KG' },
@@ -153,6 +153,7 @@ export class TraderDetailsComponent {
     this.rows = event.rows ?? 3;
     this.updatePagedData();
   }
+
 
 
 }

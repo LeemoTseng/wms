@@ -19,6 +19,7 @@ module.exports = {
           900: '#003843',
         }
       },
+      // skeleton animation
       animation: {
         shimmer: "shimmer 1.5s infinite linear",
       },

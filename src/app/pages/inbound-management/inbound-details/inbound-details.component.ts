@@ -11,14 +11,14 @@ import { PaginationComponent } from "../../../components/utilities/pagination/pa
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-trader-details',
+  selector: 'app-inbound-details',
   imports: [FormsModule, SelectModule, InputTextModule,
     ButtonModule, ReactiveFormsModule, IconFieldModule,
-    RouterLink, SkeletonLoaderComponent,
-    SkeletonLoaderComponent, PaginatorModule, PaginationComponent],
-  templateUrl: './trader-details.component.html'
+    RouterLink, SkeletonLoaderComponent, PaginationComponent],
+  templateUrl: './inbound-details.component.html'
 })
-export class TraderDetailsComponent {
+export class InboundDetailsComponent {
+
   /*---------- inject ----------*/
   // route
   route = inject(Router)
@@ -35,25 +35,6 @@ export class TraderDetailsComponent {
 
   // data
 
-  infoCols: string[] = ['交易對象名稱', '統編', '交易對象編號', '角色', '交易對象類型', '地區', '地址']
-  contactCols: string[] = ['聯絡人姓名', '職稱', 'Email', '電話', '傳真']
-
-  infoData: any =
-    {
-      partyName: '元翔企業股份有限公司',
-      partyCode: 'YX001',
-      companyID: '12345678',
-      isVendor: true,
-      partyType: '製造業',
-      address: '台北市中山區南京東路三段100號',
-    }
-  contactData: any = {
-    contactName: '王小明',
-    contactTitle: '經理',
-    email: '',
-    phoneNumber: '02-1234-5678',
-    faxNumber: '02-1234-5679',
-  }
 
   tableColumns = ['啟用', '商品名稱', '商品料好', '客戶的商品編號', '有效天數', '重量', '長寬高', '基本單位', '詳情']
   tableData = [
@@ -79,6 +60,14 @@ export class TraderDetailsComponent {
   rowsPerPageOptions: number[] = [3, 5, 10];
 
 
+  // summaryRows
+  summaryRows = [
+    { label: '總數量', values: ['ASDF123456789', '1,000 PCS'] },
+    { label: '', values: ['ASDF123456789', '1,000 PCS'] },
+    { label: '總箱子', values: ['10', '箱'] },
+    { label: '總棧板數', values: ['10', ''] },
+    { label: '總重量', values: ['10', 'KG'] },
+  ];
 
 
   /*---------- lifecycle hooks ----------*/
@@ -97,49 +86,14 @@ export class TraderDetailsComponent {
 
 
   // route to details
-  goToTraderDetails(item: string) {
-    // console.log(item);
-    this.route.navigate(['/basic-info-management/trader-details']);
-  }
+  // goToTraderDetails(item: string) {
+  //   // console.log(item);
+  //   this.route.navigate(['/inbound-management/inbound-list']);
+  // }
 
 
   // Format data
-  getInfoValue(col: string): string {
-    switch (col) {
-      case '交易對象名稱':
-        return this.infoData.partyName;
-      case '統編':
-        return this.infoData.companyID;
-      case '交易對象編號':
-        return this.infoData.partyCode;
-      case '角色':
-        return this.infoData.isVendor ? '供應商' : '客戶';
-      case '交易對象類型':
-        return this.infoData.partyType;
-      case '地區':
-        return '台灣';
-      case '地址':
-        return this.infoData.address;
-      default:
-        return '-';
-    }
-  }
-  getContactValue(col: string): string {
-    switch (col) {
-      case '聯絡人姓名':
-        return this.contactData.contactName;
-      case '職稱':
-        return this.contactData.contactTitle;
-      case 'Email':
-        return this.contactData.email || '-';
-      case '電話':
-        return this.contactData.phoneNumber;
-      case '傳真':
-        return this.contactData.faxNumber;
-      default:
-        return '-';
-    }
-  }
+
 
   // pagination
   updatePagedData() {
@@ -153,6 +107,7 @@ export class TraderDetailsComponent {
     this.rows = event.rows ?? 3;
     this.updatePagedData();
   }
+
 
 
 }

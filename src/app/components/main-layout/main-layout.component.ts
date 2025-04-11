@@ -4,7 +4,7 @@ import { filter, Subscription } from 'rxjs';
 import { MenulistService } from '../../service/menulist.service';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
-import { BookmarkComponent } from '../../components/tools/bookmark/bookmark.component';
+import { BookmarkComponent } from '../utilities/bookmark/bookmark.component';
 import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-main-layout',

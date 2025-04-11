@@ -32,5 +32,23 @@ export class ToasterComponent {
     }
   }
 
+  show(message: string, type: 'success' | 'error' | 'info' = 'success') {
+    this.toasterMsg = message;
+    this.type = type;
+    this.visible = true;
+
+    if (this.type === 'success') {
+      this.iconStyle = 'pi pi-check-circle text-green-500';
+    } else if (this.type === 'error') {
+      this.iconStyle = 'pi pi-times-circle text-red-500';
+    } else {
+      this.iconStyle = 'pi pi-info-circle text-blue-500';
+    }
+
+    setTimeout(() => {
+      this.visible = false;
+    }, this.duration || 2000);
+  }
+
 
 }

@@ -1,24 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { SelectModule } from 'primeng/select';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { ReactiveFormsModule } from '@angular/forms';
-import { IconFieldModule } from 'primeng/iconfield';
-import { SkeletonLoaderComponent } from "../../../components/utilities/skeleton-loader/skeleton-loader.component";
-import { PaginatorModule, PaginatorState } from 'primeng/paginator';
-import { PaginationComponent } from "../../../components/utilities/pagination/pagination.component";
 import { Router, RouterLink } from '@angular/router';
+import { IconFieldModule } from 'primeng/iconfield';
+import { FormsModule } from '@angular/forms';
+import { PopupComponent } from '../../../components/popup/popup.component';
 
 @Component({
-  selector: 'app-trader-details',
-  imports: [FormsModule, SelectModule, InputTextModule,
-    ButtonModule, ReactiveFormsModule, IconFieldModule,
-    RouterLink, SkeletonLoaderComponent,
-    SkeletonLoaderComponent, PaginatorModule, PaginationComponent],
-  templateUrl: './trader-details.component.html'
+  selector: 'app-new-product',
+  imports: [IconFieldModule, RouterLink, FormsModule, PopupComponent],
+  templateUrl: './new-product.component.html'
 })
-export class TraderDetailsComponent {
+export class NewProductComponent {
+
+
   /*---------- inject ----------*/
   // route
   route = inject(Router)
@@ -33,8 +26,18 @@ export class TraderDetailsComponent {
   pKeyStyle = 'text-sm ';
   pValueStyle = 'text-sm';
 
-  // data
+  // popup content
+  isPopupVisible: boolean = false;
+  popupIcon: string = 'pi-info-circle'; // icon在這裡找：https://primeng.org/icons，要換的話希望能找有outline的比較一致
+  popupIconColor: string = 'text-gray-400';
+  popupTitle: string = '確定是否儲存資料';
+  popupMessage: string = '此動作無法復原，請確認是否繼續進行。';
+  // toaster
+  toasterType: string = 'success'; // success | error | info
+  toasterMsg: string = '成功！';
+  toasterDuration: number = 1000;
 
+  // data
   infoCols: string[] = ['交易對象名稱', '統編', '交易對象編號', '角色', '交易對象類型', '地區', '地址']
   contactCols: string[] = ['聯絡人姓名', '職稱', 'Email', '電話', '傳真']
 
@@ -74,8 +77,8 @@ export class TraderDetailsComponent {
 
   first: number = 1;
   rows: number = 5; // per page
-  // totalRecords = this.tableData.length; // <----實際要使用
-  totalRecords: number = 100; // mock用，假裝有100筆資料
+  // totalRecords = this.tableData.length; // <---- 實際要使用
+  totalRecords: number = 100; // mock用，之後要刪掉
   rowsPerPageOptions: number[] = [3, 5, 10];
 
 
@@ -95,7 +98,6 @@ export class TraderDetailsComponent {
 
 
 
-
   // route to details
   goToTraderDetails(item: string) {
     // console.log(item);
@@ -104,55 +106,66 @@ export class TraderDetailsComponent {
 
 
   // Format data
-  getInfoValue(col: string): string {
+  getInfoKey(col: string): string {
     switch (col) {
       case '交易對象名稱':
-        return this.infoData.partyName;
+        return 'partyName';
       case '統編':
-        return this.infoData.companyID;
+        return 'companyID';
       case '交易對象編號':
-        return this.infoData.partyCode;
+        return 'partyCode';
       case '角色':
-        return this.infoData.isVendor ? '供應商' : '客戶';
+        return 'isVendor';
       case '交易對象類型':
-        return this.infoData.partyType;
+        return 'partyType';
       case '地區':
-        return '台灣';
+        return 'region';
       case '地址':
-        return this.infoData.address;
+        return 'address';
       default:
-        return '-';
+        return '';
     }
   }
-  getContactValue(col: string): string {
+  getContactKey(col: string): string {
     switch (col) {
       case '聯絡人姓名':
-        return this.contactData.contactName;
+        return 'contactName';
       case '職稱':
-        return this.contactData.contactTitle;
+        return 'contactTitle';
       case 'Email':
-        return this.contactData.email || '-';
+        return 'email';
       case '電話':
-        return this.contactData.phoneNumber;
+        return 'phoneNumber';
       case '傳真':
-        return this.contactData.faxNumber;
+        return 'faxNumber';
       default:
-        return '-';
+        return '';
     }
   }
 
-  // pagination
-  updatePagedData() {
-    const start = this.first;
-    const end = this.first + this.rows;
-    this.pagedData = this.tableData.slice(start, end);
+  // popup
+
+  showPopup() {
+    this.isPopupVisible = true;
+  }
+  handlePopupConfirm() {
+    this.isPopupVisible = false;
+    this.route.navigate(['/basic-info-management/products']);
+    // call api here
+    // success or not will change the toaster types
+  }
+  handlePopupCancel() {
+    this.isPopupVisible = false;
   }
 
-  onPageChange(event: PaginatorState) {
-    this.first = event.first ?? 0;
-    this.rows = event.rows ?? 3;
-    this.updatePagedData();
+  // cancel
+  btnCancel() {
+    this.route.navigate(['/basic-info-management/products']);
   }
+
+
+
+
 
 
 }

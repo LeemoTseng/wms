@@ -1,22 +1,30 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputComponent } from '../../../components/utilities/input/input.component';
 import { FormsModule } from '@angular/forms';
 import { SelectOptionComponent } from '../../../components/utilities/select-option/select-option.component';
 import { DatePickerModule } from 'primeng/datepicker';
+import { PopupComponent } from '../../../components/popup/popup.component';
 
 @Component({
   selector: 'app-new-inbound',
   imports: [IconFieldModule, DatePickerModule,
-    RouterLink, InputComponent,
+    RouterLink, InputComponent, PopupComponent,
     FormsModule, InputComponent, SelectOptionComponent,
   ],
   templateUrl: './new-inbound.component.html',
 })
 export class NewInboundComponent {
 
+  /*---------- inject ----------*/
+  // route
+  route = inject(Router)
+
   /*---------- variables ----------*/
+
+  // skeleton
+  isLoading: boolean = false;
 
   // styles
   columnstyle = 'py-4 align-left text-left text-sm';
@@ -26,6 +34,17 @@ export class NewInboundComponent {
   // input content
   traderNo: string = '12345678'; // 統編
   selectedValue: string = ''; // 供應商/客戶
+
+  // popup content
+  isPopupVisible: boolean = false;
+  popupIcon: string = 'pi-info-circle'; // icon在這裡找：https://primeng.org/icons，要換的話希望能找有outline的比較一致
+  popupIconColor: string = 'text-gray-400';
+  popupTitle: string = '確定是否儲存資料';
+  popupMessage: string = '此動作無法復原，請確認是否繼續進行。';
+  // toaster
+  toasterType: string = 'success'; // success | error | info
+  toasterMsg: string = '成功！';
+  toasterDuration: number = 1000;
 
   // table content
   /**
@@ -49,9 +68,16 @@ export class NewInboundComponent {
     { key: 'note', label: '備註', type: 'text' }
   ];
 
-
   traderTableData: any = [
     { batchNo: '', productName: '', productCode: '', productType: '', quantity: '', unit: '', inboundDate: '', expiryDate: '', warehouse: '', location: '', boxNo: '', note: '' }
+  ];
+
+  summaryRows = [
+    { label: '總數量', values: ['ASDF123456789', '1,000 PCS'] },
+    { label: '', values: ['ASDF123456789', '1,000 PCS'] },
+    { label: '總箱子', values: ['10', '箱'] },
+    { label: '總棧板數', values: ['10', ''] },
+    { label: '總重量', values: ['10', 'KG'] },
   ];
 
   /*---------- methods ----------*/
@@ -80,9 +106,25 @@ export class NewInboundComponent {
     this.traderTableData.splice(index, 1);
   }
 
-  submit() {
-    console.log('data', this.traderTableData);
-    // 送出的API寫在這
+
+
+  // popup
+  showPopup() {
+    this.isPopupVisible = true;
+  }
+  handlePopupConfirm() {
+    this.isPopupVisible = false;
+    this.route.navigate(['/inbound-management/inbound-list']);
+    // call api here
+    // success or not will change the toaster types
+  }
+  handlePopupCancel() {
+    this.isPopupVisible = false;
+  }
+  // cancel
+  btnCancel() {
+    this.route.navigate(['/inbound-management/inbound-list']);
+
   }
 
 

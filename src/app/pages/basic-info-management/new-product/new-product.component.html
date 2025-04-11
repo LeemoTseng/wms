@@ -17,11 +17,11 @@
 <div class="flex flex-col gap-5">
   <div class="title flex items-center gap-3">
     <p-iconfield
-      [routerLink]="'/basic-info-management/trader-overview'"
+      [routerLink]="'/basic-info-management/products'"
       styleClass="pi pi-angle-left  p-2 rounded-sm hover:bg-gray-100 cursor-pointer"
       style="font-size: 18px"
     ></p-iconfield>
-    <p class="text-lg font-bold">新增交易對象</p>
+    <p class="text-lg font-bold">新增商品</p>
   </div>
 
   <hr class="" />
@@ -49,40 +49,18 @@
 
   <hr class="" />
 
-  <!------------ contact info ------------>
+  <!------------ descriptional info ------------>
   <div class="title flex justify-between items-center">
-    <p class="text-base font-bold">聯絡資料</p>
+    <p class="text-base font-bold">描述性資料</p>
   </div>
 
-  <table class="">
-    @for (item of contactCols; track $index) {
-    <tr>
-      <td class="w-[130px] py-1">{{ item }}</td>
-      <td class="py-1">
-        <input
-          type="text"
-          class="border rounded px-2 py-1 w-[250px] text-sm"
-          [(ngModel)]="infoData[getContactKey(item)]"
-        />
-      </td>
-    </tr>
-    }
-  </table>
+  <!------------ UOM info ------------>
+  <div class="title flex justify-between items-center">
+    <p class="text-base font-bold">組合包資料</p>
+  </div>
 
   <hr class="" />
 
-  <!--------------- isDefault --------------->
-  <div class="flex justify-start items-center gap-x-3">
-    <input
-      id="isDefault"
-      type="checkbox"
-      class="border rounded px-2 py-1 w-fit text-sm"
-    />
-    <label for="isDefault">預設資料</label>
-    <p class="text-sm text-gray-400">
-      設定為預設資料後，下次新增時會自動帶入本筆交易對象內容
-    </p>
-  </div>
   <!-- btns -->
   <div class="flex justify-start items-center gap-x-3 mt-5">
     <div (click)="btnCancel()" class="btn-outline w-[200px] h-full">取消</div>

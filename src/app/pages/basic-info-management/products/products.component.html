@@ -4,7 +4,7 @@
   <hr />
   <div class="title flex justify-between items-center">
     <p class="text-base font-bold">商品總覽</p>
-    <div class="btn w-[200px] h-full">新增交易對象</div>
+    <div (click)="goToNewProduct()" class="btn w-[200px] h-full">新增商品</div>
   </div>
   <div class="flex flex-col gap-2 w-full">
     <!-- search -->
@@ -42,7 +42,7 @@
       <!-- btn -->
       @if (isLoading) {
       <div
-        style="cursor: default; background-color: #f2f2f2; border: none"
+        style="cursor: default; background-color: #f2f2f2"
         class="btn-outline w-[230px] bg-gray-2 cursor-default"
         onmouseover="this.style.backgroundColor='#f2f2f2';"
         onmouseout="this.style.backgroundColor='#f2f2f2';"
@@ -115,7 +115,7 @@
             <div class="flex items-center gap-x-2">
               <p-iconfield
                 style="font-size: 12px"
-                styleClass="pi pi-calendar  cursor-pointer"
+                styleClass="pi pi-calendar"
               ></p-iconfield>
               <p class="text-sm">{{ item.createdAt }}</p>
             </div>
@@ -123,7 +123,7 @@
             <div class="flex items-center gap-x-2">
               <p-iconfield
                 style="font-size: 12px"
-                styleClass="pi pi-user  cursor-pointer"
+                styleClass="pi pi-user"
               ></p-iconfield>
               <p class="text-sm">{{ item.createdByID }}</p>
             </div>
@@ -132,7 +132,7 @@
             <div class="flex items-center gap-x-2">
               <p-iconfield
                 style="font-size: 12px"
-                styleClass="pi pi-calendar  cursor-pointer"
+                styleClass="pi pi-calendar"
               ></p-iconfield>
               <p class="text-sm">{{ item.updatedAt }}</p>
             </div>
@@ -140,10 +140,17 @@
             <div class="flex items-center gap-x-2">
               <p-iconfield
                 style="font-size: 12px"
-                styleClass="pi pi-user  cursor-pointer"
+                styleClass="pi pi-user"
               ></p-iconfield>
               <p class="text-sm">{{ item.updatedByID }}</p>
             </div>
+          </td>
+          <td>
+            <p-iconfield
+              (click)="goToProductDetails(item.itemCode)"
+              style="font-size: 12px"
+              styleClass="pi pi-chevron-right cursor-pointer w-fit hover:bg-gray-100 p-2 rounded-full text-gray-500"
+            ></p-iconfield>
           </td>
         </tr>
 

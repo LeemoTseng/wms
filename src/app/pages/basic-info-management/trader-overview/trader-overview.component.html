@@ -22,6 +22,7 @@
           [valueItem]="'partyCode'"
         ></app-select-option>
         <!-- trader name -->
+
         <app-select-option
           [tableData]="tableData"
           [placeholder]="'交易對象名稱'"
@@ -140,7 +141,7 @@
             <div class="flex items-center gap-x-2">
               <p-iconfield
                 style="font-size: 12px"
-                styleClass="pi pi-calendar  cursor-pointer"
+                styleClass="pi pi-calendar"
               ></p-iconfield>
               <p class="text-sm">{{ item.createdAt }}</p>
             </div>
@@ -148,7 +149,7 @@
             <div class="flex items-center gap-x-2">
               <p-iconfield
                 style="font-size: 12px"
-                styleClass="pi pi-user  cursor-pointer"
+                styleClass="pi pi-user"
               ></p-iconfield>
               <p class="text-sm">{{ item.createdByID }}</p>
             </div>
@@ -157,7 +158,7 @@
             <div class="flex items-center gap-x-2">
               <p-iconfield
                 style="font-size: 12px"
-                styleClass="pi pi-calendar  cursor-pointer"
+                styleClass="pi pi-calendar"
               ></p-iconfield>
               <p class="text-sm">{{ item.updatedAt }}</p>
             </div>
@@ -165,7 +166,7 @@
             <div class="flex items-center gap-x-2">
               <p-iconfield
                 style="font-size: 12px"
-                styleClass="pi pi-user  cursor-pointer"
+                styleClass="pi pi-user"
               ></p-iconfield>
               <p class="text-sm">{{ item.updatedByID }}</p>
             </div>

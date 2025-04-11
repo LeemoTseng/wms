@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { PaginatorState } from 'primeng/paginator';
-import { SkeletonLoaderComponent } from '../../../components/utilities/skeleton-loader/skeleton-loader.component';
 import { IconFieldModule } from 'primeng/iconfield';
 import { FormsModule } from '@angular/forms';
 import { PopupComponent } from '../../../components/popup/popup.component';
@@ -20,7 +18,7 @@ export class NewTraderComponent {
   /*---------- variables ----------*/
 
   // skeleton
-  isLoading: boolean = true;
+  isLoading: boolean = false;
 
   // styles
   columnstyle = 'py-4 align-left text-left text-sm';
@@ -78,8 +76,8 @@ export class NewTraderComponent {
 
   first: number = 1;
   rows: number = 5; // per page
-  // totalRecords = this.tableData.length; // <----實際要使用
-  totalRecords: number = 100; // mock用，假裝有100筆資料
+  // totalRecords = this.tableData.length; // <---- 實際要使用
+  totalRecords: number = 100; // mock用，之後要刪掉
   rowsPerPageOptions: number[] = [3, 5, 10];
 
 
@@ -152,6 +150,8 @@ export class NewTraderComponent {
   handlePopupConfirm() {
     this.isPopupVisible = false;
     this.route.navigate(['/basic-info-management/trader-overview']);
+    // call api here
+    // success or not will change the toaster types
   }
   handlePopupCancel() {
     this.isPopupVisible = false;

@@ -1,0 +1,9 @@
+<div
+  class="flex items-center gap-2 hover:scale-[1.3] transition-all"
+  (click)="toggleBookmark()"
+>
+  @if (!isBookmarked) {
+  <p-iconfield styleClass="pi pi-star cursor-pointer"></p-iconfield>
+  }@else {
+  <p-iconfield styleClass="pi pi-star-fill cursor-pointer"></p-iconfield>}
+</div>

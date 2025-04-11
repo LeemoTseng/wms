@@ -11,7 +11,6 @@ import { SkeletonLoaderComponent } from "../../../components/utilities/skeleton-
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { PaginationComponent } from "../../../components/utilities/pagination/pagination.component";
 import { Router } from '@angular/router';
-import { PopupComponent } from '../../../components/popup/popup.component';
 
 
 @Component({

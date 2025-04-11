@@ -16,7 +16,8 @@ export class SidebarComponent {
 
   /*---------- inject ----------*/
   route = inject(Router);
-  menuList = inject(MenulistService).getMenuList();
+  menuListService = inject(MenulistService);
+  menuList = this.menuListService.getMenuList();
 
 
   /*---------- variables ----------*/
@@ -29,10 +30,9 @@ export class SidebarComponent {
   /*---------- lifecycle hooks ----------*/
 
   ngOnInit() {
-    this.menuList = this.menuList.map(group => ({
-      ...group,
-      items: group.items.filter(item => item.isEnabled)
-    }));
+    this.menuList.forEach(group => {
+      group.items = group.items.filter((item: any) => item.isEnabled);
+    });
   }
 
   /*---------- methods ----------*/
@@ -48,15 +48,11 @@ export class SidebarComponent {
     this.selectedMenuItem = selectedItem.label;
 
     this.menuList.forEach(group => {
-      group.items.forEach((item: any) => {
-        item.isActive = false;
-      });
+      group.items.forEach((item: any) => item.isActive = false);
     });
-    selectedItem.isActive = true;
-    console.log('selectedItem.label', selectedItem.label);
-    this.route.navigate([selectedItem.route]);
-    console.log('selectedItem.route', selectedItem.route);
 
+    selectedItem.isActive = true;
+    this.route.navigate([selectedItem.route]);
   }
 
   // toggle sidebar

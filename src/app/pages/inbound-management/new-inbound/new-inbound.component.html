@@ -1,3 +1,17 @@
+<!-- popup -->
+<app-popup
+  [icon]="popupIcon"
+  [iconColor]="popupIconColor"
+  [title]="popupTitle"
+  [message]="popupMessage"
+  [isVisible]="isPopupVisible"
+  (confirm)="handlePopupConfirm()"
+  (cancel)="handlePopupCancel()"
+  [toastertype]="toasterType"
+  [toasterMsg]="toasterMsg"
+  [toasterDuration]="toasterDuration"
+  [isLoading]="isLoading"
+></app-popup>
 <!-- container -->
 <div class="flex flex-col gap-5">
   <div class="title flex items-center gap-3">
@@ -132,6 +146,27 @@
     </tbody>
   </table>
 
+  <hr />
+  <!-- 自動計算資料 -->
+  <div class="title flex justify-between items-center">
+    <p class="text-base font-bold">總結資料</p>
+  </div>
+  <table>
+    @for (item of summaryRows; track $index) {
+    <tr>
+      <td class="w-[80px]">{{ item.label }}</td>
+      <td class="flex justify-start items-center gap-3">
+        @for (v of item.values; track $index) {
+        <p>{{ v }}</p>
+        }
+      </td>
+    </tr>
+    }
+  </table>
+
   <!-- btns -->
-  <div class="btn w-[200px] h-full">確認新增</div>
+  <div class="flex justify-start items-center gap-x-3 mt-5">
+    <div (click)="btnCancel()" class="btn-outline w-[200px] h-full">取消</div>
+    <div (click)="showPopup()" class="btn w-[200px] h-full">確認新增</div>
+  </div>
 </div>

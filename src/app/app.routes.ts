@@ -44,6 +44,20 @@ export const routes: Routes = [
                             import('./pages/basic-info-management/products/products.component').then(
                                 (m) => m.ProductsComponent
                             )
+                    }, {
+                        path: 'product-details',
+                        loadComponent: () =>
+                            import('./pages/basic-info-management/product-details/product-details.component').then(
+                                (m) => m.ProductDetailsComponent
+
+                            )
+                    }, {
+                        path: 'new-product',
+                        loadComponent: () =>
+                            import('./pages/basic-info-management/new-product/new-product.component').then(
+                                (m) => m.NewProductComponent
+
+                            )
                     },
                     {
                         path: 'customer-products',
@@ -67,6 +81,12 @@ export const routes: Routes = [
                         loadComponent: () =>
                             import('./pages/inbound-management/inbound-list/inbound-list.component').then(
                                 (m) => m.InboundListComponent
+                            )
+                    }, {
+                        path: 'inbound-details',
+                        loadComponent: () =>
+                            import('./pages/inbound-management/inbound-details/inbound-details.component').then(
+                                (m) => m.InboundDetailsComponent
                             )
                     },
                     {
@@ -176,7 +196,7 @@ export const routes: Routes = [
             }
         ]
     },
-    // reditect 
+    // rediect
     {
         path: '**',
         redirectTo: 'login'

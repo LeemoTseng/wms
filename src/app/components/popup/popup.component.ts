@@ -9,6 +9,7 @@ import { ToasterComponent } from '../toaster/toaster.component';
 })
 export class PopupComponent {
 
+
   @Input() icon: string = 'pi-exclamation-triangle text-red-500';
   @Input() iconColor: string = 'text-red-500';
   @Input() title: string = 'Popup Title';
@@ -26,18 +27,16 @@ export class PopupComponent {
   @Input() toasterDuration: number = 1000;
 
   onConfirm() {
-
     if (this.toaster) {
       this.toaster.visible = true;
 
       setTimeout(() => {
-        this.toaster!.visible = false;
-        this.confirm.emit();
+        this.confirm.emit(); // will trigger api call from outter component
+        // when isLoading === true, it will show btn loading spinner 
+        this.toaster!.visible = true;
       }, this.toaster!.duration || 2000);
     }
-
   }
-
   onCancel() {
     this.cancel.emit();
   }

@@ -9,6 +9,7 @@ import { SelectModule } from 'primeng/select';
 
 })
 export class SelectOptionComponent {
+  selectOptions: { label: string; value: any }[] = [];
 
   /*---------- @input ----------*/
   @Input() tableData: any[] = [];
@@ -24,6 +25,15 @@ export class SelectOptionComponent {
    */
 
 
+
+  /*-------lifecycle hook-------*/
+
+  ngOnInit() {
+    this.selectOptions = this.tableData.map(item => ({
+      label: this.isObject(item) ? item[this.valueItem] : item,
+      value: this.isObject(item) ? item[this.valueItem] : item
+    }));
+  }
   /*---------- methods ----------*/
 
   isObject(value: any): boolean {

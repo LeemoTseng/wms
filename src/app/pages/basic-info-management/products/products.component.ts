@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
 import { InputTextModule } from 'primeng/inputtext';
@@ -9,6 +9,7 @@ import { SelectOptionComponent } from "../../../components/utilities/select-opti
 import { SkeletonLoaderComponent } from "../../../components/utilities/skeleton-loader/skeleton-loader.component";
 import { PaginatorState } from 'primeng/paginator';
 import { PaginationComponent } from "../../../components/utilities/pagination/pagination.component";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,6 +21,9 @@ import { PaginationComponent } from "../../../components/utilities/pagination/pa
   templateUrl: './products.component.html'
 })
 export class ProductsComponent {
+
+  /*---------- inject ----------*/
+  route = inject(Router)
 
   /*---------- variables ----------*/
 
@@ -37,7 +41,7 @@ export class ProductsComponent {
   isActive: boolean | undefined; // 啟用
 
 
-  tableColumns = ['啟用', '商品料號', '商品名稱', '商品分類', '有效天數', '長寬高', '重量', '體積', '建立人員', '最後更新'];
+  tableColumns = ['啟用', '商品料號', '商品名稱', '商品分類', '有效天數', '長寬高', '重量', '體積', '建立人員', '最後更新', '詳情'];
 
   tableData = [
     { isActive: true, itemCode: 'ITEM001', itemName: '智能手錶', category: '電子', validDays: 365, length: 10, width: 5, height: 1.2, weight: 0.150, volume: 0.060, createdByID: 'admin', createdAt: '2024-01-10', updatedByID: 'admin', updatedAt: '2024-02-12' },
@@ -60,7 +64,8 @@ export class ProductsComponent {
 
   first: number = 1;
   rows: number = 5; // per page
-  totalRecords = this.tableData.length;
+  // totalRecords = this.tableData.length; // <----實際要使用
+  totalRecords: number = 100; // mock用，假裝有100筆資料
   rowsPerPageOptions: number[] = [3, 5, 10];
 
 
@@ -102,6 +107,16 @@ export class ProductsComponent {
     this.first = event.first ?? 0;
     this.rows = event.rows ?? 3;
     this.updatePagedData();
+  }
+
+  // route to details
+  goToProductDetails(item: string) {
+    // console.log(item);
+    this.route.navigate(['/basic-info-management/product-details']);
+  }
+  goToNewProduct() {
+    // console.log(item);
+    this.route.navigate(['/basic-info-management/new-product']);
   }
 
 }
