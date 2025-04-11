@@ -1,0 +1,159 @@
+<!-- container -->
+<div class="flex flex-col gap-5">
+  <div class="title flex items-center gap-3">
+    <p-iconfield
+      [routerLink]="'/basic-info-management/trader-overview'"
+      styleClass="pi pi-angle-left  p-2 rounded-sm hover:bg-gray-100 cursor-pointer"
+      style="font-size: 18px"
+    ></p-iconfield>
+    <p class="text-lg font-bold">{{ infoData.partyName }}</p>
+  </div>
+
+  <hr class="" />
+
+  <!------------ basic info ------------>
+  <div class="title flex justify-between items-center">
+    <p class="text-base font-bold">基本資料</p>
+    <div
+      [routerLink]="'/basic-info-management/new-trader'"
+      class="btn-outline w-[200px] h-full"
+    >
+      修改資料
+    </div>
+  </div>
+  @if(isLoading) {
+  <table class="">
+    @for (item of [1,2,3,4,5]; track $index) {
+    <tr class="w-[1/2vw] py-3">
+      <td [attr.colspan]="tableColumns.length" class="py-2">
+        <app-skeleton-loader
+          [rowHeight]="20"
+          [cols]="1"
+          [rows]="1"
+        ></app-skeleton-loader>
+      </td>
+      <td></td>
+    </tr>
+    }
+  </table>
+  }@else {
+  <table class="">
+    @for (item of infoCols; track $index) {
+    <tr>
+      <td class="w-[130px] py-1">{{ item }}</td>
+      <td class="py-1">
+        {{ getInfoValue(item) }}
+      </td>
+    </tr>
+    }
+  </table>
+  }
+  <hr class="" />
+
+  <!------------ contact info ------------>
+  <div class="title flex justify-between items-center">
+    <p class="text-base font-bold">聯絡資料</p>
+  </div>
+  @if(isLoading) {
+  <table class="">
+    @for (item of [1,2,3,4,5]; track $index) {
+    <tr class="w-[1/2vw] py-3">
+      <td [attr.colspan]="tableColumns.length" class="py-2">
+        <app-skeleton-loader
+          [rowHeight]="20"
+          [cols]="1"
+          [rows]="1"
+        ></app-skeleton-loader>
+      </td>
+      <td></td>
+    </tr>
+    }
+  </table>
+  }@else {
+  <table class="">
+    @for (item of contactCols; track $index) {
+    <tr>
+      <td class="w-[130px] py-1">{{ item }}</td>
+      <td class="py-1">
+        {{ getContactValue(item) }}
+      </td>
+    </tr>
+    }
+  </table>
+  }
+  <hr class="" />
+
+  <!--------------- prodoct related --------------->
+  <div class="title flex justify-between items-center">
+    <p class="text-base font-bold">相關商品資料</p>
+  </div>
+  <!-- pagination -->
+  <div class="flex justify-end">
+    <app-pagination
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="totalRecords"
+      [rowsPerPageOptions]="rowsPerPageOptions"
+      (onPageChange)="onPageChange($event)"
+    ></app-pagination>
+  </div>
+  <!-- products list -->
+  <table class="">
+    <thead>
+      <tr align="left" class="border-b">
+        @for (item of tableColumns; track $index) {
+        <th class="pb-3 text-sm">
+          <p>{{ item }}</p>
+        </th>
+        }
+      </tr>
+    </thead>
+    @if (isLoading) {
+    <tbody>
+      @for (item of [1,2,3,4,5,6,7,8,9,10]; track $index) {
+      <tr>
+        <td [attr.colspan]="tableColumns.length" class="py-5">
+          <app-skeleton-loader
+            [rowHeight]="20"
+            [cols]="1"
+            [rows]="1"
+          ></app-skeleton-loader>
+        </td>
+      </tr>
+      }
+    </tbody>
+    } @else {
+    <tbody>
+      @for (item of tableData; track $index) {
+      <tr class="border-b py-3 table-fixed">
+        <td [class]="columnstyle">
+          @if (item.isActive) {
+          <div class="ml-2 rounded-full w-[10px] h-[10px] bg-green-400"></div>
+          }@else {
+          <div class="ml-2 rounded-full w-[10px] h-[10px] bg-gray-200"></div>
+
+          }
+        </td>
+        <td [class]="columnstyle">{{ item.itemName }}</td>
+        <td [class]="columnstyle">{{ item.itemCode }}</td>
+        <td [class]="columnstyle">{{ item.description }}</td>
+        <td [class]="columnstyle">{{ item.validDays }}</td>
+        <td [class]="columnstyle">{{ item.weight }}</td>
+        <td [class]="columnstyle">
+          {{ item.length + "x" + item.width + "x" + item.height }}
+        </td>
+        <td [class]="columnstyle">{{ item.baseUom }}</td>
+        <td>
+          <p-iconfield
+            (click)="goToTraderDetails(item.itemCode)"
+            style="font-size: 12px"
+            styleClass="pi pi-chevron-right cursor-pointer w-fit hover:bg-gray-100 p-2 rounded-full text-gray-500"
+          ></p-iconfield>
+        </td>
+      </tr>
+
+      }
+    </tbody>
+    }
+  </table>
+</div>

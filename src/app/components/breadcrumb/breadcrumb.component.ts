@@ -12,5 +12,7 @@ export class BreadcrumbComponent {
 
   /*---------- @inputs ----------*/
   @Input() breadcrumbList: any[] = [];
+  enabledBreadcrumbList = this.breadcrumbList.filter(item => item.isEnable);
+
 
 }

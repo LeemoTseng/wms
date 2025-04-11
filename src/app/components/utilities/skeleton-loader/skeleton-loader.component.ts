@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class SkeletonLoaderComponent {
 
-  skeletonStyles: string = 'w-full rounded bg-gradient-to-r from-gray-50 via-gray-100 to-gray-0 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite_linear]';
+  skeletonStyles: string = 'rounded bg-gradient-to-r from-gray-50 via-gray-100 to-gray-0 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite_linear]';
 
   @Input() rows: number = 5;
   @Input() cols: number = 6;

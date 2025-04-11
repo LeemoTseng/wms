@@ -1,0 +1,18 @@
+<div class="flex items-center">
+  <p-paginator
+    class="text-sm cursor-pointer"
+    (onPageChange)="emitPageChange($event)"
+    [pageLinkSize]="4"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="totalRecords"
+  />
+  <input
+    class="w-fit px-2 h-[28px] border rounded inline"
+    type="number"
+    [(ngModel)]="gotoPage"
+    (keyup.enter)="goToPage()"
+    min="1"
+    [max]="totalPages"
+  />
+</div>

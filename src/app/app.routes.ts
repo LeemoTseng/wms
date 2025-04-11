@@ -22,8 +22,22 @@ export const routes: Routes = [
                         loadComponent: () =>
                             import('./pages/basic-info-management/trader-overview/trader-overview.component').then(
                                 (m) => m.TraderOverviewComponent
+                            ),
+
+                    }, {
+                        path: 'trader-details',
+                        loadComponent: () =>
+                            import('./pages/basic-info-management/trader-details/trader-details.component').then(
+                                (m) => m.TraderDetailsComponent
+                            )
+                    }, {
+                        path: 'new-trader',
+                        loadComponent: () =>
+                            import('./pages/basic-info-management/new-trader/new-trader.component').then(
+                                (m) => m.NewTraderComponent
                             )
                     },
+
                     {
                         path: 'products',
                         loadComponent: () =>

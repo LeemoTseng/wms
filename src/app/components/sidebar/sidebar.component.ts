@@ -29,6 +29,10 @@ export class SidebarComponent {
   /*---------- lifecycle hooks ----------*/
 
   ngOnInit() {
+    this.menuList = this.menuList.map(group => ({
+      ...group,
+      items: group.items.filter(item => item.isEnabled)
+    }));
   }
 
   /*---------- methods ----------*/
@@ -45,10 +49,10 @@ export class SidebarComponent {
 
     this.menuList.forEach(group => {
       group.items.forEach((item: any) => {
-        item.active = false;
+        item.isActive = false;
       });
     });
-    selectedItem.active = true;
+    selectedItem.isActive = true;
     console.log('selectedItem.label', selectedItem.label);
     this.route.navigate([selectedItem.route]);
     console.log('selectedItem.route', selectedItem.route);

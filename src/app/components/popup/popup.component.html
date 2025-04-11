@@ -1,0 +1,60 @@
+<app-toaster
+  #toasterRef
+  [type]="toastertype"
+  [toasterMsg]="toasterMsg"
+  [duration]="toasterDuration"
+></app-toaster>
+@if (isVisible) {
+<div
+  class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex items-center justify-center z-10"
+>
+  <div
+    class="w-[400px] h-[300px] bg-white rounded-lg shadow-lg flex flex-col items-center justify-center"
+  >
+    <p-iconfield
+      style="font-size: 50px"
+      [styleClass]="'pi' + ' ' + icon + ' ' + iconColor"
+    ></p-iconfield>
+
+    <p class="text-xl font-semibold text-gray-800 mt-4">{{ title }}</p>
+    <p class="text-sm text-gray-600 mt-2 text-center px-4">{{ message }}</p>
+
+    <div class="flex gap-x-4 mt-6">
+      <button
+        pButton
+        label="Cancel"
+        icon="pi pi-times"
+        (click)="onCancel()"
+        class="w-[120px] btn-outline"
+      >
+        取消
+      </button>
+
+      @if (isLoading) {
+      <button
+        pButton
+        label="OK"
+        icon="pi pi-check"
+        style="cursor: default"
+        class="w-[120px] p-button-primary btn"
+      >
+        <div
+          class="mx-auto w-5 h-5 border-2 my-[2px] border-gray-300 border-t-transparent rounded-full animate-spin"
+        ></div>
+      </button>
+      } @else {
+      <button
+        pButton
+        label="OK"
+        icon="pi pi-check"
+        (click)="onConfirm()"
+        class="w-[120px] p-button-primary btn"
+      >
+        確認
+      </button>
+      }
+    </div>
+  </div>
+  <div class="alpha absolute bg-black/70 w-[100vw] h-[100vh] -z-10"></div>
+</div>
+}
